@@ -58,16 +58,16 @@ const registerTeacher = async(req,res)=>{
 const loginTeacher = async (req,res)=>{
     
 
-    const {name, password}  = req.body;
+    const {email, password}  = req.body;
 
-    if(!name || !password)
+    if(!email || !password)
     {
         return res.status(500).json({
             message: "all fields are required",
             success: "false",
         })
     }
-    const teacher = await Teacher.findOne({name});
+    const teacher = await Teacher.findOne({email});
     const isPasswordValid = await teacher.isPasswordCorrect(password);
     if(!isPasswordValid)
     {
