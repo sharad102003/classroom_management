@@ -99,9 +99,10 @@ const loginPrincipal = async (req, res) => {
         const loggedinPrincipal = await Principal.findById(principal._id).select("-password -refreshToken");
 
         // Set cookies
-        const options = {
+         const options = {
             httpOnly: true,
-            secure: true, // Should be true if using HTTPS
+            secure: process.env.NODE_ENV === 'production', 
+            sameSite: 'None', 
         };
 
         return res
