@@ -78,11 +78,11 @@ const loginTeacher = async (req,res)=>{
     const {accessToken, refreshToken} = await generateAccessAndRefereshTokens(teacher._id);
     const loggedinTeacher = await Teacher.findById(teacher._id).select("-password -refreshToken")
 
-    const options = {
-        httpOnly: true,
-        secure: true, // Should be true if using HTTPS
-        // Other options like maxAge, domain, etc., as needed
-      };
+     const options = {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // Use secure in production
+            sameSite: 'None', // Set to 'None' for cross-site requests
+        };
     
       res
         .status(200)
