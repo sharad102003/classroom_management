@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { TextField, Button, MenuItem, Select, FormControl, InputLabel, Container, Typography, Paper, Box } from '@mui/material';
 
 const UnifiedLogin = () => {
-  const [name, setName] = useState('');
+  const [email, setName] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('principal');
   const [error, setError] = useState('');
@@ -31,7 +31,7 @@ const UnifiedLogin = () => {
           throw new Error('Invalid role selected');
       }
 
-      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}${endpoint}`, { name, password },
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}${endpoint}`, { email, password },
        { withCredentials: true });
       const { accessToken, refreshToken } = response.data;
 
@@ -79,7 +79,7 @@ const UnifiedLogin = () => {
           </FormControl>
           <TextField
             label="Name"
-            value={name}
+            value={email}
             onChange={(e) => setName(e.target.value)}
             fullWidth
             margin="normal"
