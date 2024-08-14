@@ -62,9 +62,9 @@ const registerPrincipal = async (req, res) => {
 };
 
 const loginPrincipal = async (req, res) => {
-    const { name, password } = req.body;
+    const { email, password } = req.body;
 
-    if (!name || !password) {
+    if (!email || !password) {
         return res.status(400).json({
             message: "All fields are required",
             success: false,
@@ -73,7 +73,7 @@ const loginPrincipal = async (req, res) => {
 
     try {
         // Find the principal by name
-        const principal = await Principal.findOne({ name });
+        const principal = await Principal.findOne({ email });
         
         // Check if principal exists
         if (!principal) {
