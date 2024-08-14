@@ -55,9 +55,9 @@ const registerStudent = async(req,res)=>{
 
 };
 const loginStudent = async (req, res) => {
-    const { name, password } = req.body;
+    const { email, password } = req.body;
 
-    if (!name || !password) {
+    if (!email || !password) {
         return res.status(400).json({
             message: "All fields are required",
             success: false,
@@ -65,7 +65,7 @@ const loginStudent = async (req, res) => {
     }
 
     try {
-        const student = await Student.findOne({ name });
+        const student = await Student.findOne({ email });
         if (!student) {
             return res.status(404).json({
                 message: "Student not found",
