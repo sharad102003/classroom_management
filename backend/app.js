@@ -22,50 +22,6 @@ app.use(cors({
   credentials: true,               // Enable credentials (if using cookies/auth)
 }));
 
-// HTTP server for Socket.IO
-const server = http.createServer(app);
-
-// Initialize Socket.IO
-const io = new Server(server, {
-  cors: {
-    origin: 'http://localhost:3000',  // Allow the frontend to connect
-    methods: ["GET", "POST"],
-    credentials: true
-  }
-});
-
-// WebSocket connection event
-io.on('connection', (socket) => {
-  console.log('A user connected:', socket.id);
-
-  // Join a room
-  socket.on('joinRoom', ({ roomId }) => {
-    socket.join(roomId);
-    console.log(`User with ID: ${socket.id} joined room: ${roomId}`);
-  });
-
-  // Handle message sending via Socket.IO
-  socket.on('sendMessage', async (messageData) => {
-    try {
-      const { room, sender, text } = messageData;
-
-      // Save the message to the database
-      const savedMessage = await saveMessage({ body: { room, text }, user: { _id: sender } }, {});
-
-      // Emit the message to all clients in the room
-      io.to(room).emit('receiveMessage', savedMessage);
-    } catch (error) {
-      console.error('Error saving message:', error);
-    }
-  });
-
-  // Disconnect event
-  socket.on('disconnect', () => {
-    console.log('User disconnected:', socket.id);
-  });
-});
-
-// RESTful API routes
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
