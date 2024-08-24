@@ -101,7 +101,8 @@ const loginPrincipal = async (req, res) => {
         // Set cookies
         const options = {
             httpOnly: true,
-            secure: true, // Should be true if using HTTPS
+            secure: true,
+            sameSite: 'None'// Should be true if using HTTPS
             // Other options like maxAge, domain, etc., as needed
           };
         return res
