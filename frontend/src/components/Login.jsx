@@ -78,7 +78,7 @@ const UnifiedLogin = () => {
             </Select>
           </FormControl>
           <TextField
-            label="Name"
+            label="email"
             value={email}
             onChange={(e) => setName(e.target.value)}
             fullWidth
