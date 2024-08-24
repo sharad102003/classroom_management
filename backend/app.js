@@ -18,7 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: 'http://localhost:3000', // Allow only localhost
+  origin: 'https://classroom-management-frontend.vercel.app', // Allow only localhost
   credentials: true,               // Enable credentials (if using cookies/auth)
 }));
 
