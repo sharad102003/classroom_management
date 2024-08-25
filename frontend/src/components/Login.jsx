@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, MenuItem, Select, FormControl, InputLabel, Container, Typography, Paper, Box } from '@mui/material';
+import { TextField, Button, MenuItem, Select, FormControl, InputLabel, Container, Typography, Paper, Box, Divider } from '@mui/material';
 
 const UnifiedLogin = () => {
   const [email, setName] = useState('');
@@ -9,9 +9,6 @@ const UnifiedLogin = () => {
   const [role, setRole] = useState('principal');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-
- 
-  
 
   const handleLogin = async () => {
     try {
@@ -78,7 +75,7 @@ const UnifiedLogin = () => {
             </Select>
           </FormControl>
           <TextField
-            label="email"
+            label="Email"
             value={email}
             onChange={(e) => setName(e.target.value)}
             fullWidth
@@ -103,6 +100,23 @@ const UnifiedLogin = () => {
           >
             Login
           </Button>
+        </Box>
+
+        {/* Section for showing sample credentials */}
+        <Divider sx={{ my: 3, width: '100%' }} />
+        <Typography variant="body1" color="textSecondary">Sample Credentials:</Typography>
+        <Box sx={{ mt: 1, textAlign: 'left' }}>
+          <Typography variant="body2"><strong>Principal:</strong></Typography>
+          <Typography variant="body2">Email: principal@classroom.com</Typography>
+          <Typography variant="body2">Password: Admin</Typography>
+
+          <Typography variant="body2" sx={{ mt: 2 }}><strong>Teacher:</strong></Typography>
+          <Typography variant="body2">Email: teacher1@gmail.com</Typography>
+          <Typography variant="body2">Password: teacher1</Typography>
+
+          <Typography variant="body2" sx={{ mt: 2 }}><strong>Student:</strong></Typography>
+          <Typography variant="body2">Email: student1@gmail.com</Typography>
+          <Typography variant="body2">Password: student1</Typography>
         </Box>
       </Paper>
     </Container>
